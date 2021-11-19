@@ -13,6 +13,9 @@ public class GiftTax {
         55 000 — 200 000       4 700                    12
         200 000 — 1 000 000    22 100	               15
         1 000 000 —            142 100	               17
+        
+        Example 6000€ gift implies 180€ of gift tax (100 + (6000-5000) * 0.08), 
+        and 75000€ gift implies 7100€ of gift tax (4700 + (75000-55000) * 0.12)
         */
         
         System.out.println("Value of the gift?");
