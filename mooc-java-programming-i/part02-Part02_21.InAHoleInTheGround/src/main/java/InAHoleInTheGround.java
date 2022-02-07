@@ -6,5 +6,7 @@ public class InAHoleInTheGround {
     
     public static void printText() {
         // Write some code in here
+        //Only need this single print to pass the test.
+        System.out.println("In a hole in the ground there lived a method");
     }
 }

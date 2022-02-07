@@ -12,4 +12,15 @@ public class Division {
     }
 
     // implement the method here
+    public static void division(int numerator, int denominator) {
+        
+        //Division by zero is not a real number and not allowed.
+        if (denominator != 0) {
+            
+            //We want a floating point number so store the result in a double
+            //Cast either number to a double
+            double result = (double)numerator / denominator;
+            System.out.println(result);
+        }
+    }
 }
