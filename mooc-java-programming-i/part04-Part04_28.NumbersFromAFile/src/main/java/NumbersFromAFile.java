@@ -13,7 +13,21 @@ public class NumbersFromAFile {
         int lowerBound = Integer.valueOf(scanner.nextLine());
         System.out.print("Upper bound? ");
         int upperBound = Integer.valueOf(scanner.nextLine());
+        int count = 0;
 
+        
+        try (Scanner sc = new Scanner(Paths.get(file))) {
+            while(sc.hasNextLine()) {
+                int num = Integer.parseInt(sc.nextLine());
+                if (num >= lowerBound && num <= upperBound) {
+                    count++;
+                }
+            }
+            System.out.println("Numbers: " + count);
+        } catch(Exception e) {
+            
+        }
+        
     }
 
 }
