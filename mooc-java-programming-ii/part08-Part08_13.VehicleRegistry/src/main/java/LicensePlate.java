@@ -19,4 +19,37 @@ public class LicensePlate {
         return country + " " + liNumber;
     }
 
+    /*
+    Honestly, just use the code generation tools provided by the IDE for equals 
+    and hascode methods. 
+    */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.liNumber);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LicensePlate other = (LicensePlate) obj;
+        if (!Objects.equals(this.liNumber, other.liNumber)) {
+            return false;
+        }
+        if (!Objects.equals(this.country, other.country)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 }
