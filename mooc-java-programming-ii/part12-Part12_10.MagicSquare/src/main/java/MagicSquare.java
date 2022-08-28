@@ -17,15 +17,49 @@ public class MagicSquare {
 
     // implement these three methods
     public ArrayList<Integer> sumsOfRows() {
-        return new ArrayList<>();
+        ArrayList<Integer> sums = new ArrayList<>();
+        int sumOfRow = 0;
+        for (int row = 0; row < square.length; row++) {
+            for (int column = 0; column < square[row].length; column++) {
+                sumOfRow += square[row][column];
+            }
+            sums.add(sumOfRow);
+            sumOfRow = 0;
+        }
+        return sums;
     }
 
     public ArrayList<Integer> sumsOfColumns() {
-        return new ArrayList<>();
+        ArrayList<Integer> sums = new ArrayList<>();
+        int sumOfColumn = 0;
+        for (int row = 0; row < square.length; row++) {
+            for (int column = 0; column < square[row].length; column++) {
+                sumOfColumn += square[column][row];
+            }
+            sums.add(sumOfColumn);
+            sumOfColumn = 0;
+        }
+        return sums;
     }
 
+    /*
+    This method is a little trickier than the other 2. The other 2 followed the 
+    base laid out in the course material. This one we need to find the sums of 
+    both diagonals.
+    Another option instead of my implementation is to iterate twice and find 
+    each diagonals sum.
+    */
     public ArrayList<Integer> sumsOfDiagonals() {
-        return new ArrayList<>();
+        ArrayList<Integer> sums = new ArrayList<>();
+        int sum1 = 0;
+        int sum2 = 0;
+        for (int row = 0; row < square.length; row++) {
+            sum1 += square[row][row];
+            sum2 += square[row][(square.length - 1) - row];
+        }
+        sums.add(sum1);
+        sums.add(sum2);
+        return sums;
     }
 
     // ready-made helper methods -- don't touch these

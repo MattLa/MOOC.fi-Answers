@@ -13,5 +13,15 @@ public class ReadingFilesPerLine {
         // test the method here
 
     }
+    
+    public static List<String> read(String file) {
+        List<String> words = new ArrayList<>();
+        try {
+        Files.lines(Paths.get(file)).forEach(string -> words.add(string));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return words;
+    }
 
 }

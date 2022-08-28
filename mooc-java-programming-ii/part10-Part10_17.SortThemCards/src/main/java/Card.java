@@ -1,6 +1,6 @@
 
 
-public class Card {
+public class Card implements Comparable<Card> {
 
     private int value;
     private Suit suit;
@@ -38,4 +38,32 @@ public class Card {
         return suit;
     }
 
+    /**
+     * Implement the compareTo method so that using it sorts the cards in 
+     * ascending order based on their value. If the cards being compared have the 
+     * same value, they are sorted by club first, diamond second, heart third, 
+     * and spade last.
+     * @param o
+     * @return 
+     */
+    @Override
+    public int compareTo(Card o) {
+        if (this.value == o.getValue()) {
+            if (this.suit.ordinal() == o.getSuit().ordinal()) {
+                return 0;
+            }
+            if (this.suit.ordinal() > o.getSuit().ordinal()) {
+                return 1;
+            }
+            if (this.suit.ordinal() < o.getSuit().ordinal()) {
+                return -1;
+            }
+        }
+        if (this.value > o.getValue()) {
+            return 1;
+        } else  {
+            return -1;
+        }
+    }
+    
 }
