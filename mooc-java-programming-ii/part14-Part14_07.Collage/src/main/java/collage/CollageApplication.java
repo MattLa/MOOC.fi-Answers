@@ -25,35 +25,34 @@ public class CollageApplication extends Application {
 
         int width = (int) sourceImage.getWidth();
         int height = (int) sourceImage.getHeight();
-
+        int smallerWidth = (int) (sourceImage.getWidth() / 2);
+        int smallerHeight = (int) (sourceImage.getHeight() / 2);
+ 
         WritableImage targetImage = new WritableImage(width, height);
         PixelWriter imageWriter = targetImage.getPixelWriter();
+        
+        //use the smaller image for the loop
+        for (int y = 0; y < smallerHeight; y++) {
+            for (int x = 0; x < smallerWidth; x++) {
+                //Read the original size image to get the colors
+                Color color = imageReader.getColor(x * 2, y * 2);
 
-        int yCoordinate = 0;
-        while (yCoordinate < height) {
-            int xCoordinate = 0;
-            while (xCoordinate < width) {
+                //Apple the negative colour effect
+                Color negativeColor = applyNegativeEffect(color);
 
-                Color color = imageReader.getColor(xCoordinate, yCoordinate);
-                double red = color.getRed();
-                double green = color.getGreen();
-                double blue = color.getBlue();
-                double opacity = color.getOpacity();
-
-                Color newColor = new Color(red, green, blue, opacity);
-
-                imageWriter.setColor(xCoordinate, yCoordinate, newColor);
-
-                xCoordinate++;
+                //Write the image 4 times with changes to the x/y coordinates to shift the image around
+                imageWriter.setColor(x, y, negativeColor);
+                imageWriter.setColor((x + smallerWidth), y, negativeColor);
+                imageWriter.setColor(x, (y + smallerHeight), negativeColor);
+                imageWriter.setColor((x + smallerWidth), (y + smallerHeight), negativeColor);
             }
-
-            yCoordinate++;
         }
 
         ImageView image = new ImageView(targetImage);
-
+        
         Pane pane = new Pane();
         pane.getChildren().add(image);
+
 
         stage.setScene(new Scene(pane));
         stage.show();
@@ -61,6 +60,15 @@ public class CollageApplication extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    private Color applyNegativeEffect(Color colorToChange) {
+        double red = 1.0 - colorToChange.getRed();
+        double green = 1.0 - colorToChange.getGreen();
+        double blue = 1.0 - colorToChange.getBlue();
+        double opacity = colorToChange.getOpacity();
+        
+        return new Color(red, green, blue, opacity);
     }
 
 }
